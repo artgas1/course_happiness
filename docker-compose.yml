@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  web:
+
+    build: ./DocGen
+    command: python3 manage.py runserver 0.0.0.0:8000
+    working_dir: /usr/src/app
+    ports:
+      - 8000:8000

@@ -11,7 +11,9 @@ RUN apt-get --no-install-recommends install libreoffice -y
 RUN apt-get install -y libreoffice-java-common
 
 # Method2 - additionally installing unoconv
-RUN apt-get install unoconv
+# RUN apt-get install unoconv
+
+RUN apt-get install libpq-dev -y
 
 ARG CACHEBUST=1
 # set work directory

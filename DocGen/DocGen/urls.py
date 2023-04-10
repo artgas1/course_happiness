@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from DocGen.docgenapp import urls
+from docgenapp import urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include(urls.urlpatterns))
+    path("api/", include(urls.urlpatterns)),
+    path('dj-rest-auth/', include('dj_rest_auth.urls'))
 ]

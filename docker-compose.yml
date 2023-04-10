@@ -1,9 +1,51 @@
-version: '3.7'
+version: '3.9'
 services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "happinessdb"
+      POSTGRES_USER: "happinessuser"
+      POSTGRES_PASSWORD: "happinesspassword"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - .:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U happinessuser -d happinessdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 4G
   web:
-
     build: ./DocGen
-    command: python3 manage.py runserver 0.0.0.0:8000
+    # volumes:
+    #   - .:/usr/src/app
+    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate --no-input && python3 manage.py initadmin && python3 manage.py runserver 0.0.0.0:8000"
     working_dir: /usr/src/app
     ports:
       - 8000:8000
+    depends_on:
+      - postgres
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: keking@mail.ru
+      PGADMIN_DEFAULT_PASSWORD: keking
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
+
+volumes:
+    pgadmin:

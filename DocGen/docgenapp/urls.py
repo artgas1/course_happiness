@@ -11,15 +11,13 @@ router.register(
     basename="upload-template-created-by-advisor",
 )
 router.register(
-    r"keking", views.UploadTemplateCreatedByAdvisorViewSetForStudent, basename="kek"
+    r"get-templates-uploaded-by-advisor", views.UploadTemplateCreatedByAdvisorViewSetForStudentViewSet, basename="templates-uploaded-by-advisor"
+)
+router.register(
+    r"get-templates-for-advisor", views.TemplateForAdvisorViewSet, basename='templates-for-advisor'
 )
 
 # Wire up our API using automatic URL routing.
 urlpatterns = [
-    path("", include(router.urls)),
-    re_path(
-        "advisor_templates/",
-        views.UploadTemplateCreatedByAdvisorListForStudents.as_view(),
-        name="UploadTemplateCreatedByAdvisorListForStudents",
-    ),
+    path("", include(router.urls))
 ]

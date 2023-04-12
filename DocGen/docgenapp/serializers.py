@@ -33,3 +33,10 @@ class TemplateCreatedByAdvisorSerializer(serializers.ModelSerializer):
         model = models.TemplateCreatedByAdvisor
         fields = ("id", "name", "docx_template", "json_template", "advisor")
         read_only_fields = ("id", "advisor")
+        
+
+class DocumentTemplateForAdvisorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.DocumentTemplateForAdvisor
+        fields = ('name', 'description', 'file')
+        read_only_fields = ("id",)

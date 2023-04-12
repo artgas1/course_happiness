@@ -71,30 +71,18 @@ class UploadTemplateCreatedByAdvisorViewSet(viewsets.ModelViewSet):
         serializer.save(advisor=self.request.user)
 
 
-class UploadTemplateCreatedByAdvisorListForStudents(generics.ListAPIView):
-    serializer_class = serializers.TemplateCreatedByAdvisorSerializer
 
-    def get_queryset(self):
-        """
-        This view should return a list of all the purchases
-        for the currently authenticated user.
-        """
-
-        queryset = models.TemplateCreatedByAdvisor.objects.all()
-        advisor_email = self.request.query_params.get("advisor_email")
-        if advisor_email is not None:
-            queryset = queryset.filter(advisor__email=advisor_email)
-            return models.TemplateCreatedByAdvisor.objects.filter(
-                advisor__email=advisor_email
-            )
-        else:
-            return models.TemplateCreatedByAdvisor.objects.all()
-
-
-class UploadTemplateCreatedByAdvisorViewSetForStudent(
+class UploadTemplateCreatedByAdvisorViewSetForStudentViewSet(
     mixins.ListModelMixin, viewsets.GenericViewSet
 ):
     serializer_class = serializers.TemplateCreatedByAdvisorSerializer
     queryset = models.TemplateCreatedByAdvisor.objects.all()
     filter_backends = [filters.SearchFilter]
-    search_fields = ["advisor__email"]
+    search_fields = ["advisor__email", "advisor__first_name", "advisor__last_name"]
+
+
+class TemplateForAdvisorViewSet(
+    mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    serializer_class = serializers.DocumentTemplateForAdvisorSerializer
+    queryset = models.DocumentTemplateForAdvisor.objects.all()

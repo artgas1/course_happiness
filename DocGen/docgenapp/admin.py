@@ -3,11 +3,12 @@ from docgenapp.models import DocumentTemplateForAdvisor, TemplateCreatedByAdviso
 
 # Register your models here.
 
+
 @admin.register(DocumentTemplateForAdvisor)
 class AuthorAdmin(admin.ModelAdmin):
-     list_display = ["name", "description", "file"]
-     
-    
+    list_display = ["name", "description", "file"]
+
+
 @admin.register(TemplateCreatedByAdvisor)
 class AuthorAdmin(admin.ModelAdmin):
-     list_display = ["name", "advisor", "docx_template", "json_template"]
+    list_display = ["name", "advisor", "docx_template", "json_template"]

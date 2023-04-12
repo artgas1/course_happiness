@@ -25,5 +25,5 @@ from docgenapp.admin import admin
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(urls.urlpatterns)),
-    path('dj-rest-auth/', include('dj_rest_auth.urls'))
+    path("dj-rest-auth/", include("dj_rest_auth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -39,14 +39,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    'rest_framework.authtoken',
-    'dj_rest_auth',
+    "rest_framework.authtoken",
+    "dj_rest_auth",
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+        # 'rest_framework.authentication.SessionAuthentication',
     ]
 }
 
@@ -85,19 +85,19 @@ WSGI_APPLICATION = "DocGen.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'happinessdb',
-        'USER': 'happinessuser',
-        'PASSWORD': 'happinesspassword',
-        'HOST': 'postgres',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "happinessdb",
+        "USER": "happinessuser",
+        "PASSWORD": "happinesspassword",
+        "HOST": "postgres",
+        "PORT": "5432",
     }
 }
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
-    ('admin', 'admin@mysite.com', 'admin'),
+    ("admin", "admin@mysite.com", "admin"),
 )
 
 
@@ -142,6 +142,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = "media/"
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"

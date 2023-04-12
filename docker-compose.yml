@@ -29,6 +29,8 @@ services:
     #   - .:/usr/src/app
     command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate --no-input && python3 manage.py initadmin && python3 manage.py runserver 0.0.0.0:8000"
     working_dir: /usr/src/app
+    volumes:
+      - ./media:/usr/src/app/media
     ports:
       - 8000:8000
     depends_on:
@@ -42,10 +44,11 @@ services:
       PGADMIN_DEFAULT_PASSWORD: keking
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-       - pgadmin:/var/lib/pgadmin
+       - ./pgadmin:/var/lib/pgadmin
     ports:
       - "${PGADMIN_PORT:-5050}:80"
     restart: unless-stopped
 
 volumes:
     pgadmin:
+    media:

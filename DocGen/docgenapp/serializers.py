@@ -27,7 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TemplateCreatedByAdvisorSerializer(serializers.ModelSerializer):
-    advisor = UserSerializer()
+    advisor = UserSerializer(required=False)
 
     class Meta:
         model = models.TemplateCreatedByAdvisor
